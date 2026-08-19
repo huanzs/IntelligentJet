@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Qoder" version="24.0.0">
+  <diagram id="fig6_7" name="图6-7 RBAC四步权限校验算法">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" value="API请求到达" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="输入: request, permission_code" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="150" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step1" value="步骤1: 提取令牌
+token = extract_bearer_token(...)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="260" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="t1" value="token 存在 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="370" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e401a" value="返回 401 缺少认证令牌" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="370" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="decode" value="payload = jwt.decode(token, SECRET, HS256)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="480" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="payload 有效 且
+payload.type == 'access' ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="590" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e401b" value="返回 401 令牌无效" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="590" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step2" value="步骤2: 身份查询
+user = User.query.get(sub)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="700" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1" value="user 存在 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="810" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e401c" value="返回 401 用户不存在" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="810" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step3" value="步骤3: 状态校验
+检查 user.is_active" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="920" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u2" value="is_active == True ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1030" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e401d" value="返回 401 账号已禁用" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1030" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step4" value="步骤4: 权限匹配
+permissions = ⋃ role.permissions" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1140" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="permission_code
+∈ permissions ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1250" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e403" value="返回 403 权限不足" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1250" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="call" value="call_business_handler(request)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1360" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="out" value="输出: 业务响应" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1470" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end" value="结束" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1580" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="start" target="input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="input" target="step1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="step1" target="t1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="t1" target="decode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="t1" target="e401a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="decode" target="t2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="t2" target="step2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="t2" target="e401b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="step2" target="u1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="u1" target="step3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="u1" target="e401c">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="step3" target="u2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="u2" target="step4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="u2" target="e401d">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="step4" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="p1" target="call">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="p1" target="e403">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="call" target="out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="out" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="e401a" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="e401b" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="e401c" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="e401d" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="e403" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

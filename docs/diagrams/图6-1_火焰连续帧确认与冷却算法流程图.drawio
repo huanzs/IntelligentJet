@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Qoder" version="24.0.0">
+  <diagram id="fig6_1" name="图6-1 火焰连续帧确认与冷却算法">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" value="开始 / 每帧检测到达" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="输入: detections, now
+参数: fire_confirm_frames, cooldown_seconds" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="150" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="check" value="len(detections) &gt; 0 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="260" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="reset" value="consecutive_fire_frames = 0" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="260" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="inc" value="consecutive_fire_frames += 1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="370" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="th" value="consecutive_fire_frames
+≥ fire_confirm_frames ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="480" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cool" value="now ≥ cooldown_until ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="590" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="largest" value="largest = argmax (x2-x1)*(y2-y1)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="700" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="center" value="cx=(x1+x2)/2
+cy=(y1+y2)/2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="810" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="update" value="consecutive_fire_frames = 0
+cooldown_until = now + cooldown_seconds" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="920" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fire" value="返回 (True, cx, cy)" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1030" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="notfire" value="返回 (False, None, None)" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1030" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end" value="结束 / 等待下一帧" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1140" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="start" target="input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="input" target="check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="check" target="inc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="check" target="reset">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="reset" target="notfire">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="inc" target="th">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="th" target="cool">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="th" target="notfire">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="cool" target="largest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="cool" target="notfire">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="largest" target="center">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="center" target="update">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="update" target="fire">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="fire" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="notfire" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

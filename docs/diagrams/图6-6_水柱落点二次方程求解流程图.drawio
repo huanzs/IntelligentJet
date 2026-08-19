@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Qoder" version="24.0.0">
+  <diagram id="fig6_6" name="图6-6 水柱落点二次方程求解算法">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" value="开始 / 炮管角度变化" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="输入: 炮口(x0,y0,z0)
+方向(dx,dy,dz), 速度v, 重力g" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="150" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vel" value="vx = dx·v;  vy = dy·v;  vz = dz·v" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="260" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="coef" value="构造方程: y0 + vy·t − ½g·t² = 0
+令 a = -½g, b = vy, c = y0" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="370" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="disc" value="判别式 Δ = b² − 4ac" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="480" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cdisc" value="Δ &lt; 0 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="590" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nosol" value="返回 NO_SOLUTION
+指示器隐藏" style="shape=process;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="720" y="590" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="roots" value="t1 = (-b + √Δ) / (2a)
+t2 = (-b − √Δ) / (2a)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="700" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pick" value="t = max(t for t in {t1,t2} if t &gt; 0)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="810" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="haspos" value="t 存在正根 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="920" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="land" value="x_land = x0 + vx·t
+z_land = z0 + vz·t" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1030" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="out" value="输出: 落点(x_land, 0, z_land)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1140" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end" value="结束 / 更新落点指示器" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1250" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="start" target="input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="input" target="vel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="vel" target="coef">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="coef" target="disc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="disc" target="cdisc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="cdisc" target="nosol">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="cdisc" target="roots">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="roots" target="pick">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="pick" target="haspos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="haspos" target="land">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="haspos" target="nosol">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="land" target="out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="out" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="nosol" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

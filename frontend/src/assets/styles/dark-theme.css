@@ -1,0 +1,270 @@
+/*
+ * @Time    : 2026/8/19 10:00
+ * @Author  : Jason Huan
+ * @Email   : 549473121@qq.com
+ * @File    : dark-theme.css
+ * @Project : intelligent-jet
+ */
+
+/* ===== RBAC Dark Theme - Element Plus Override ===== */
+/* Based on Sanity Design System color palette */
+
+:root {
+  /* Core colors */
+  --rbac-bg: #0b0b0b;
+  --rbac-surface: #212121;
+  --rbac-surface-tertiary: #353535;
+  --rbac-border: #353535;
+  --rbac-border-subtle: #212121;
+  --rbac-text-primary: #ffffff;
+  --rbac-text-secondary: #b9b9b9;
+  --rbac-text-tertiary: #797979;
+  --rbac-cta: #f36458;
+  --rbac-interactive: #0052ef;
+  --rbac-error: #dd0000;
+  --rbac-success: #19d600;
+
+  /* Element Plus overrides */
+  --el-bg-color: #0b0b0b;
+  --el-bg-color-overlay: #212121;
+  --el-bg-color-page: #0b0b0b;
+  --el-text-color-primary: #ffffff;
+  --el-text-color-regular: #b9b9b9;
+  --el-text-color-secondary: #b9b9b9;
+  --el-text-color-placeholder: #797979;
+  --el-border-color: #353535;
+  --el-border-color-light: #212121;
+  --el-border-color-lighter: #212121;
+  --el-fill-color-blank: #0b0b0b;
+  --el-fill-color-light: #212121;
+  --el-fill-color-lighter: #1a1a1a;
+  --el-fill-color-extra-light: #212121;
+  --el-color-primary: #0052ef;
+  --el-color-danger: #dd0000;
+  --el-color-success: #19d600;
+  --el-mask-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Global */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0b0b0b;
+  color: #ffffff;
+  font-family: Inter, 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+}
+
+#app {
+  height: 100vh;
+}
+
+/* Table dark theme */
+.el-table {
+  --el-table-bg-color: #0b0b0b;
+  --el-table-tr-bg-color: #0b0b0b;
+  --el-table-header-bg-color: #212121;
+  --el-table-row-hover-bg-color: #1a1a1a;
+  --el-table-border-color: #353535;
+  --el-table-text-color: #ffffff;
+  --el-table-header-text-color: #b9b9b9;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background: #161616;
+}
+
+/* Input dark theme */
+.el-input__wrapper {
+  background-color: #0b0b0b !important;
+  box-shadow: 0 0 0 1px #212121 inset !important;
+  border-radius: 3px;
+}
+
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px #353535 inset !important;
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 2px #0052ef inset !important;
+}
+
+.el-input__inner {
+  color: #b9b9b9 !important;
+  transition: background-color 99999s ease-in-out 99999s;
+}
+
+.el-input__inner:-webkit-autofill {
+  -webkit-text-fill-color: #b9b9b9;
+  caret-color: #b9b9b9;
+}
+
+.el-input__inner::placeholder {
+  color: #797979 !important;
+}
+
+/* Textarea */
+.el-textarea__inner {
+  background-color: #0b0b0b !important;
+  border: 1px solid #212121 !important;
+  border-radius: 3px !important;
+  color: #b9b9b9 !important;
+}
+
+.el-textarea__inner:focus {
+  border-color: #0052ef !important;
+}
+
+/* Button primary */
+.el-button--primary {
+  --el-button-bg-color: #f36458;
+  --el-button-border-color: #f36458;
+  --el-button-hover-bg-color: #0052ef;
+  --el-button-hover-border-color: #0052ef;
+  --el-button-text-color: #ffffff;
+  border-radius: 99999px;
+}
+
+.el-button--primary:hover {
+  --el-button-bg-color: #0052ef;
+  --el-button-border-color: #0052ef;
+}
+
+/* Button default */
+.el-button--default {
+  --el-button-bg-color: #212121;
+  --el-button-border-color: #353535;
+  --el-button-text-color: #b9b9b9;
+  --el-button-hover-bg-color: #0052ef;
+  --el-button-hover-border-color: #0052ef;
+  --el-button-hover-text-color: #ffffff;
+}
+
+/* Text button */
+.el-button--text {
+  color: #b9b9b9;
+}
+
+.el-button--text:hover {
+  color: #0052ef;
+}
+
+/* Dialog dark theme */
+.el-dialog {
+  --el-dialog-bg-color: #212121;
+  border: 1px solid #353535;
+  border-radius: 6px;
+}
+
+.el-dialog__title {
+  color: #ffffff !important;
+}
+
+.el-dialog__headerbtn .el-dialog__close {
+  color: #797979;
+}
+
+.el-dialog__headerbtn:hover .el-dialog__close {
+  color: #0052ef;
+}
+
+/* Form labels */
+.el-form-item__label {
+  color: #b9b9b9 !important;
+}
+
+/* Pagination */
+.el-pagination {
+  --el-pagination-bg-color: transparent;
+  --el-pagination-text-color: #b9b9b9;
+  --el-pagination-button-bg-color: #212121;
+  --el-pagination-hover-color: #0052ef;
+}
+
+.el-pagination .btn-prev,
+.el-pagination .btn-next {
+  color: #b9b9b9 !important;
+  background: #212121 !important;
+}
+
+.el-pager li {
+  color: #b9b9b9 !important;
+  background: transparent !important;
+}
+
+.el-pager li.is-active {
+  color: #0052ef !important;
+}
+
+/* Tag */
+.el-tag {
+  border-radius: 99999px;
+}
+
+/* Switch */
+.el-switch__label {
+  color: #797979;
+}
+
+.el-switch__label.is-active {
+  color: #ffffff;
+}
+
+/* Checkbox */
+.el-checkbox__label {
+  color: #b9b9b9 !important;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #ffffff !important;
+}
+
+/* Message box */
+.el-message-box {
+  --el-messagebox-title-color: #ffffff;
+  --el-messagebox-content-color: #b9b9b9;
+  background-color: #212121 !important;
+  border: 1px solid #353535 !important;
+}
+
+/* Loading overlay */
+.el-loading-mask {
+  background-color: rgba(11, 11, 11, 0.7) !important;
+}
+
+/* Message */
+.el-message {
+  border: 1px solid #353535 !important;
+  background-color: #212121 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #353535;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #797979;
+}
+
+/* Menu items */
+.el-menu-item {
+  border-radius: 0 !important;
+}
+
+.el-menu-item:hover {
+  background-color: #1a1a1a !important;
+}
+
+.el-menu-item.is-active {
+  background-color: rgba(0, 82, 239, 0.15) !important;
+}

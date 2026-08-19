@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Qoder" version="24.0.0">
+  <diagram id="fig6_3" name="图6-3 云台垂直角度坐标系转换算法">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" value="开始" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="340" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mode" value="转换方向 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="340" y="150" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="输入: physical ∈ [-90°, +90°]" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="120" y="260" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pc" value="physical ≥ 0 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="120" y="370" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pup" value="coded = 360 - physical
+上仰映射到 (270°, 360°]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="480" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pdown" value="coded = abs(physical)
+下俯映射到 (0°, 90°]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="260" y="480" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pout" value="输出: coded ∈ [0°, 360°)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="120" y="590" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" value="输入: coded ∈ [0°, 360°)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="260" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rc" value="270 ≤ coded &lt; 360 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="370" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rup" value="physical = 360 - coded
+解码为上仰 (0°, 90°]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="420" y="480" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rdown" value="physical = -coded
+解码为下俯 [-90°, 0°)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="700" y="480" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rout" value="输出: physical ∈ [-90°, +90°]" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="590" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end" value="结束" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="340" y="700" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="start" target="mode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="物理 → 协议" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="mode" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="协议 → 物理" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="mode" target="r1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="p1" target="pc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="pc" target="pup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="pc" target="pdown">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="pup" target="pout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="pdown" target="pout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="pout" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="r1" target="rc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="是" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="rc" target="rup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="否" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="rc" target="rdown">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="rup" target="rout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="rdown" target="rout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#000000;" edge="1" parent="1" source="rout" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

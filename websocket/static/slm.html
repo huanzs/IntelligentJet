@@ -1,0 +1,596 @@
+<!--
+  @Time    : 2026/8/19 10:00
+  @Author  : Jason Huan
+  @Email   : 549473121@qq.com
+  @File    : slm.html
+  @Project : intelligent-jet
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消防炮角度监控</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f1923;
+            color: #e0e6ed;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a2a3a 0%, #0f1923 100%);
+            padding: 20px 32px;
+            border-bottom: 1px solid #1e3a5f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .connection-panel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #555;
+            transition: background 0.3s;
+        }
+
+        .status-dot.connected { background: #00e676; box-shadow: 0 0 8px #00e67688; }
+        .status-dot.connecting { background: #ffc107; animation: pulse 1s infinite; }
+        .status-dot.error { background: #ff5252; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #8899aa;
+            min-width: 100px;
+        }
+
+        .ws-url-input {
+            background: #1a2a3a;
+            border: 1px solid #2a4a6a;
+            border-radius: 6px;
+            color: #e0e6ed;
+            padding: 8px 14px;
+            font-size: 14px;
+            width: 260px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .ws-url-input:focus { border-color: #4fc3f7; }
+
+        .btn {
+            padding: 8px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-connect {
+            background: #1565c0;
+            color: #fff;
+        }
+
+        .btn-connect:hover { background: #1976d2; }
+
+        .btn-disconnect {
+            background: #c62828;
+            color: #fff;
+        }
+
+        .btn-disconnect:hover { background: #d32f2f; }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .data-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .data-card {
+            background: linear-gradient(180deg, #1a2a3a 0%, #152232 100%);
+            border: 1px solid #1e3a5f;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .data-card:hover { border-color: #4fc3f7; }
+
+        .data-card .label {
+            font-size: 13px;
+            color: #6b8299;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .data-card .value {
+            font-size: 48px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            transition: color 0.3s;
+        }
+
+        .data-card .unit {
+            font-size: 18px;
+            font-weight: 400;
+            color: #6b8299;
+            margin-left: 4px;
+        }
+
+        .card-h .value { color: #4fc3f7; }
+        .card-v .value { color: #66bb6a; }
+        .card-p .value { color: #ffa726; }
+
+        .detail-section {
+            background: #1a2a3a;
+            border: 1px solid #1e3a5f;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .detail-section h3 {
+            font-size: 14px;
+            color: #6b8299;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .detail-item {
+            background: #0f1923;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .detail-item .key {
+            font-size: 12px;
+            color: #556677;
+            margin-bottom: 6px;
+        }
+
+        .detail-item .val {
+            font-size: 14px;
+            font-weight: 500;
+            color: #b0c4d8;
+        }
+
+        .log-section {
+            background: #1a2a3a;
+            border: 1px solid #1e3a5f;
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+
+        .log-section h3 {
+            font-size: 14px;
+            color: #6b8299;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .log-container {
+            background: #0a1018;
+            border-radius: 8px;
+            padding: 12px 16px;
+            height: 180px;
+            overflow-y: auto;
+            font-family: "Cascadia Code", "Fira Code", monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .log-container::-webkit-scrollbar { width: 6px; }
+        .log-container::-webkit-scrollbar-track { background: transparent; }
+        .log-container::-webkit-scrollbar-thumb { background: #2a4a6a; border-radius: 3px; }
+
+        .log-entry { opacity: 0.9; }
+        .log-entry .time { color: #556677; }
+        .log-entry.status { color: #4fc3f7; }
+        .log-entry.data { color: #66bb6a; }
+        .log-entry.warning { color: #ffa726; }
+        .log-entry.error { color: #ff5252; }
+
+        .no-data {
+            text-align: center;
+            color: #556677;
+            padding: 40px 0;
+            font-size: 15px;
+        }
+
+        /* 方向控制面板 */
+        .control-section {
+            background: #1a2a3a;
+            border: 1px solid #1e3a5f;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .control-section h3 {
+            font-size: 14px;
+            color: #6b8299;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ctrl-btn {
+            width: 72px;
+            height: 48px;
+            border: 1px solid #2a4a6a;
+            border-radius: 8px;
+            background: #0f1923;
+            color: #b0c4d8;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .ctrl-btn:hover { border-color: #4fc3f7; color: #4fc3f7; }
+        .ctrl-btn:active { background: #1a3a5a; transform: scale(0.95); }
+
+        .ctrl-btn.active {
+            background: #1565c0;
+            border-color: #4fc3f7;
+            color: #fff;
+            box-shadow: 0 0 10px #1565c088;
+        }
+
+        .ctrl-btn.stop-btn {
+            width: auto;
+            padding: 0 20px;
+        }
+
+        .move-state-display {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #6b8299;
+        }
+
+        .move-state-display .state-value {
+            color: #4fc3f7;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .data-cards { grid-template-columns: 1fr; }
+            .detail-grid { grid-template-columns: repeat(2, 1fr); }
+            .header { flex-direction: column; gap: 12px; align-items: flex-start; }
+            .connection-panel { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>消防炮角度监控</h1>
+    <div class="connection-panel">
+        <div class="status-dot" id="statusDot"></div>
+        <span class="status-text" id="statusText">未连接</span>
+        <input type="text" class="ws-url-input" id="wsUrl" value="ws://localhost:8765/ws/slm" placeholder="WebSocket 地址">
+        <button class="btn btn-connect" id="btnConnect" onclick="connectWS()">连接</button>
+        <button class="btn btn-disconnect" id="btnDisconnect" onclick="disconnectWS()" disabled>断开</button>
+    </div>
+</div>
+
+<div class="main-content">
+    <!-- 核心数据卡片 -->
+    <div class="data-cards">
+        <div class="data-card card-h">
+            <div class="label">水平角度</div>
+            <div class="value" id="hAngle">--<span class="unit">°</span></div>
+        </div>
+        <div class="data-card card-v">
+            <div class="label">垂直角度</div>
+            <div class="value" id="vAngle">--<span class="unit">°</span></div>
+        </div>
+        <div class="data-card card-p">
+            <div class="label">管道压力</div>
+            <div class="value" id="pressure">--<span class="unit">MPa</span></div>
+        </div>
+    </div>
+
+    <!-- 方向控制 -->
+    <div class="control-section">
+        <h3>方向控制</h3>
+        <div class="control-panel">
+            <div class="control-row">
+                <button class="ctrl-btn" id="btnUp" onclick="sendMove('up')">上</button>
+            </div>
+            <div class="control-row">
+                <button class="ctrl-btn" id="btnLeft" onclick="sendMove('left')">左</button>
+                <button class="ctrl-btn stop-btn" id="btnStop" onclick="sendMove('stop')">停止</button>
+                <button class="ctrl-btn" id="btnRight" onclick="sendMove('right')">右</button>
+            </div>
+            <div class="control-row">
+                <button class="ctrl-btn" id="btnDown" onclick="sendMove('down')">下</button>
+                <button class="ctrl-btn stop-btn" id="btnHome" onclick="sendMove('home')">归位</button>
+            </div>
+            <div class="move-state-display">
+                当前状态: <span class="state-value" id="moveStateDisplay">stop</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详细状态 -->
+    <div class="detail-section" style="display: none;" >
+        <h3>设备状态</h3>
+        <div class="detail-grid" id="detailGrid">
+            <div class="detail-item"><div class="key">控制类型</div><div class="val" id="dCtrlType">--</div></div>
+            <div class="detail-item"><div class="key">状态类型</div><div class="val" id="dStatusType">--</div></div>
+            <div class="detail-item"><div class="key">X 正向状态</div><div class="val" id="dXPos">--</div></div>
+            <div class="detail-item"><div class="key">X 负向状态</div><div class="val" id="dXNeg">--</div></div>
+            <div class="detail-item"><div class="key">Y 正向状态</div><div class="val" id="dYPos">--</div></div>
+            <div class="detail-item"><div class="key">Y 负向状态</div><div class="val" id="dYNeg">--</div></div>
+            <div class="detail-item"><div class="key">X 正限位</div><div class="val" id="dXPosLimit">--</div></div>
+            <div class="detail-item"><div class="key">X 负限位</div><div class="val" id="dXNegLimit">--</div></div>
+            <div class="detail-item"><div class="key">Y 正限位</div><div class="val" id="dYPosLimit">--</div></div>
+            <div class="detail-item"><div class="key">Y 负限位</div><div class="val" id="dYNegLimit">--</div></div>
+        </div>
+    </div>
+
+    <!-- 日志 -->
+    <div class="log-section">
+        <h3>消息日志</h3>
+        <div class="log-container" id="logContainer"></div>
+    </div>
+</div>
+
+<script>
+    let ws = null;
+    let reconnectTimer = null;
+    let currentMoveState = "stop";
+    let lastAngleLogKey = null;
+    let lastAngleLogEl = null;
+    let lastAngleCount = 0;
+
+    const MOVE_BTN_MAP = {
+        left: "btnLeft",
+        right: "btnRight",
+        up: "btnUp",
+        down: "btnDown",
+    };
+
+    function updateMoveButtons() {
+        Object.values(MOVE_BTN_MAP).forEach(id => {
+            document.getElementById(id).classList.remove("active");
+        });
+        if (MOVE_BTN_MAP[currentMoveState]) {
+            document.getElementById(MOVE_BTN_MAP[currentMoveState]).classList.add("active");
+        }
+        document.getElementById("moveStateDisplay").textContent = currentMoveState;
+    }
+
+    function sendMove(direction) {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(direction);
+        }
+    }
+
+    function setStatus(state, text) {
+        const dot = document.getElementById('statusDot');
+        const txt = document.getElementById('statusText');
+        dot.className = 'status-dot ' + state;
+        txt.textContent = text;
+    }
+
+    function addLog(type, message) {
+        const container = document.getElementById('logContainer');
+        const now = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+        const entry = document.createElement('div');
+        entry.className = 'log-entry ' + type;
+        entry.innerHTML = `<span class="time">[${now}]</span> ${message}`;
+        container.appendChild(entry);
+        container.scrollTop = container.scrollHeight;
+        while (container.children.length > 200) {
+            const removed = container.firstChild;
+            if (removed === lastAngleLogEl) {
+                lastAngleLogEl = null;
+                lastAngleLogKey = null;
+                lastAngleCount = 0;
+            }
+            container.removeChild(removed);
+        }
+        return entry;
+    }
+
+    function updateData(data) {
+        document.getElementById('hAngle').innerHTML =
+            (data.horizontal_angle >= 0 ? '+' : '') + data.horizontal_angle.toFixed(1) + '<span class="unit">°</span>';
+        document.getElementById('vAngle').innerHTML =
+            (data.vertical_angle >= 0 ? '+' : '') + data.vertical_angle.toFixed(1) + '<span class="unit">°</span>';
+        document.getElementById('pressure').innerHTML =
+            data.pressure_mpa.toFixed(2) + '<span class="unit">MPa</span>';
+
+        document.getElementById('dCtrlType').textContent = data.control_type;
+        document.getElementById('dStatusType').textContent = data.status_type;
+        document.getElementById('dXPos').textContent = data.x_positive_status;
+        document.getElementById('dXNeg').textContent = data.x_negative_status;
+        document.getElementById('dYPos').textContent = data.y_positive_status;
+        document.getElementById('dYNeg').textContent = data.y_negative_status;
+        document.getElementById('dXPosLimit').textContent = data.x_pos_limit;
+        document.getElementById('dXNegLimit').textContent = data.x_neg_limit;
+        document.getElementById('dYPosLimit').textContent = data.y_pos_limit;
+        document.getElementById('dYNegLimit').textContent = data.y_neg_limit;
+    }
+
+    function connectWS() {
+        const url = document.getElementById('wsUrl').value.trim();
+        if (!url) return;
+
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.close();
+        }
+
+        setStatus('connecting', '连接中...');
+        addLog('status', '正在连接 ' + url);
+
+        ws = new WebSocket(url);
+
+        ws.onopen = () => {
+            setStatus('connected', '已连接');
+            addLog('status', 'WebSocket 连接成功');
+            document.getElementById('btnConnect').disabled = true;
+            document.getElementById('btnDisconnect').disabled = false;
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const msg = JSON.parse(event.data);
+
+                switch (msg.type) {
+                    case 'angle_data':
+                        updateData(msg.data);
+                        if (msg.move_state) {
+                            currentMoveState = msg.move_state;
+                            updateMoveButtons();
+                        }
+                        const hStr = (msg.data.horizontal_angle >= 0 ? '+' : '') + msg.data.horizontal_angle.toFixed(1);
+                        const vStr = (msg.data.vertical_angle >= 0 ? '+' : '') + msg.data.vertical_angle.toFixed(1);
+                        const pStr = msg.data.pressure_mpa.toFixed(2);
+                        const moveTag = msg.move_state && msg.move_state !== 'stop' ? `  [${msg.move_state}]` : '';
+                        const logKey = hStr + '|' + vStr + '|' + pStr + '|' + moveTag;
+
+                        if (logKey === lastAngleLogKey && lastAngleLogEl) {
+                            lastAngleCount++;
+                            const now = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+                            const baseText = `水平: ${hStr}°  垂直: ${vStr}°  压力: ${pStr} MPa${moveTag}`;
+                            lastAngleLogEl.innerHTML =
+                                `<span class="time">[${now}]</span> ${baseText}` +
+                                `<span style="color:#ffa726;margin-left:8px">×${lastAngleCount}</span>`;
+                        } else {
+                            lastAngleLogKey = logKey;
+                            lastAngleCount = 1;
+                            const baseText = `水平: ${hStr}°  垂直: ${vStr}°  压力: ${pStr} MPa${moveTag}`;
+                            lastAngleLogEl = addLog('data', baseText);
+                        }
+                        break;
+                    case 'move_state':
+                        currentMoveState = msg.move_state;
+                        updateMoveButtons();
+                        addLog('status', `移动状态: ${msg.move_state}`);
+                        lastAngleLogKey = null;
+                        lastAngleLogEl = null;
+                        lastAngleCount = 0;
+                        break;
+                    case 'status':
+                        addLog('status', msg.message);
+                        lastAngleLogKey = null;
+                        lastAngleLogEl = null;
+                        lastAngleCount = 0;
+                        break;
+                    case 'warning':
+                        addLog('warning', msg.message);
+                        lastAngleLogKey = null;
+                        lastAngleLogEl = null;
+                        lastAngleCount = 0;
+                        break;
+                    case 'error':
+                        addLog('error', msg.message);
+                        lastAngleLogKey = null;
+                        lastAngleLogEl = null;
+                        lastAngleCount = 0;
+                        break;
+                }
+            } catch (e) {
+                addLog('warning', '收到非 JSON 消息: ' + event.data);
+            }
+        };
+
+        ws.onclose = () => {
+            setStatus('', '已断开');
+            addLog('error', 'WebSocket 连接已关闭');
+            document.getElementById('btnConnect').disabled = false;
+            document.getElementById('btnDisconnect').disabled = true;
+        };
+
+        ws.onerror = () => {
+            setStatus('error', '连接失败');
+            addLog('error', 'WebSocket 连接出错');
+        };
+    }
+
+    function disconnectWS() {
+        if (reconnectTimer) {
+            clearTimeout(reconnectTimer);
+            reconnectTimer = null;
+        }
+        if (ws) {
+            ws.close();
+            ws = null;
+        }
+        setStatus('', '未连接');
+        document.getElementById('btnConnect').disabled = false;
+        document.getElementById('btnDisconnect').disabled = true;
+        addLog('status', '已手动断开连接');
+    }
+
+    window.addEventListener('beforeunload', () => {
+        if (ws) ws.close();
+    });
+</script>
+
+</body>
+</html>
