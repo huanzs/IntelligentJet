@@ -6,6 +6,11 @@
 # @File    : angle_conversion.py
 # @Project : intelligent-jet
 
+"""
+角度坐标转换模块 - 画面坐标→云台角度→消防炮角度的双目视觉转换
+"""
+
+
 class BinaryProcessor:
     def __init__(self):
         pass

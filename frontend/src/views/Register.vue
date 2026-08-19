@@ -5,6 +5,9 @@
  * @File    : Register.vue
  * @Project : intelligent-jet
  */
+ *
+ * 注册页 - 用户注册，含表单验证
+ */
 
 <template>
   <div class="register-page">

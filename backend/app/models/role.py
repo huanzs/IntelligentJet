@@ -6,6 +6,11 @@
 # @File    : role.py
 # @Project : intelligent-jet
 
+"""
+角色数据模型 - 定义 roles 表结构和角色-权限多对多关系
+"""
+
+
 from app.extensions import db
 from datetime import datetime
 

@@ -5,6 +5,9 @@
  * @File    : Roles.vue
  * @Project : intelligent-jet
  */
+ *
+ * 角色管理页 - 角色列表/创建/编辑/删除/权限分配
+ */
 
 <template>
   <div class="roles-page">

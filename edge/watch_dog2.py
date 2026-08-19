@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : watch_dog2.py
 # @Project : intelligent-jet
+
+"""
+智能联动主控模块v2 - 引入消息队列优化联动流程
+"""
+
 import queue
 
 

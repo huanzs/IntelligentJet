@@ -6,6 +6,11 @@
 # @File    : env.py
 # @Project : intelligent-jet
 
+"""
+Alembic 数据库迁移环境配置 - Flask-Migrate 自动生成
+"""
+
+
 import logging
 from logging.config import fileConfig
 

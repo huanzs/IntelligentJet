@@ -5,6 +5,9 @@
  * @File    : roles.js
  * @Project : intelligent-jet
  */
+ * 
+ * 角色管理 API 封装 - CRUD 和权限分配
+ */
 
 import http from './index'
 

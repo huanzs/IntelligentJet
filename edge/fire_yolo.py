@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : fire_yolo.py
 # @Project : intelligent-jet
+
+"""
+火焰 YOLOv5 检测模块 - 实时火焰检测与连续帧判稳算法
+"""
+
 import sys
 import os
 

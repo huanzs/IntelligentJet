@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : watch_dog.py
 # @Project : intelligent-jet
+
+"""
+智能联动主控模块 - 火焰检测→定位→瞄准→喷射全自动联动
+"""
+
 import json
 import threading
 import queue

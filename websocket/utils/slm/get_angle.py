@@ -7,6 +7,11 @@
 # @File    : get_angle.py
 # @Project : intelligent-jet
 
+"""
+消防炮角度读取模块 - 实时查询消防炮当前水平和垂直角度
+"""
+
+
 
 import socket
 import struct

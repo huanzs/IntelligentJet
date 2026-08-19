@@ -5,6 +5,9 @@
  * @File    : WaterSpray.js
  * @Project : intelligent-jet
  */
+ * 
+ * Three.js 水柱粒子特效 - 基于抛体物理模拟的水柱可视化
+ */
 
 import * as THREE from 'three'
 

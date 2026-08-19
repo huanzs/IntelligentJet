@@ -6,6 +6,11 @@
 # @File    : shared.py
 # @Project : intelligent-jet
 
+"""
+边缘端共享状态模块 - 线程间共享的火焰检测状态和控制信号
+"""
+
+
 import threading
 
 FIRE_CONFIRM_COUNT = 5

@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : watch_dog3.py
 # @Project : intelligent-jet
+
+"""
+智能联动主控模块v3 - 支持JSON协议的联动控制
+"""
+
 import json
 import queue
 import threading

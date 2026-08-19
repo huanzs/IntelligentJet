@@ -6,6 +6,11 @@
 # @File    : user.py
 # @Project : intelligent-jet
 
+"""
+用户数据模型 - 定义 users 表结构、密码哈希、权限查询方法
+"""
+
+
 from app.extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime

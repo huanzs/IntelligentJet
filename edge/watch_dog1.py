@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : watch_dog1.py
 # @Project : intelligent-jet
+
+"""
+智能联动主控模块v1 - 基础版联动控制
+"""
+
 import threading
 
 from camera_control import CameraControl

@@ -5,6 +5,9 @@
  * @File    : ThreeDOperation.vue
  * @Project : intelligent-jet
  */
+ *
+ * 3D操作页 - Three.js消防炮3D模型+实时角度同步+水柱特效
+ */
 
 <template>
   <div class="three-d-container">

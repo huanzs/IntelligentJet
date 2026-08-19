@@ -6,6 +6,11 @@
 # @File    : slm_driver.py
 # @Project : intelligent-jet
 
+"""
+消防炮设备驱动模块 - 通过 TCP 协议与 GCAN-212 通信
+"""
+
+
 import socket
 
 

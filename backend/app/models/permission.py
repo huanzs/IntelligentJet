@@ -6,6 +6,11 @@
 # @File    : permission.py
 # @Project : intelligent-jet
 
+"""
+权限数据模型 - 定义 permissions 表结构，权限编码格式为 资源:操作
+"""
+
+
 from app.extensions import db
 from datetime import datetime
 

@@ -5,6 +5,9 @@
  * @File    : PermissionDirective.js
  * @Project : intelligent-jet
  */
+ * 
+ * v-permission 自定义指令 - 按钮级权限控制
+ */
 
 import { useAuthStore } from '../stores/auth'
 

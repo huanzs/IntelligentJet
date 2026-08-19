@@ -6,6 +6,11 @@
 # @File    : users.py
 # @Project : intelligent-jet
 
+"""
+用户管理 API 模块 - 提供用户 CRUD 和角色分配接口，支持分页查询
+"""
+
+
 from flask import Blueprint, request
 from app.models.user import User
 from app.models.role import Role

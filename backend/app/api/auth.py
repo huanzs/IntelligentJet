@@ -6,6 +6,11 @@
 # @File    : auth.py
 # @Project : intelligent-jet
 
+"""
+认证 API 模块 - 提供用户注册、登录、Token刷新、获取当前用户信息接口
+"""
+
+
 from flask import Blueprint, request
 from app.models.user import User
 from app.models.role import Role

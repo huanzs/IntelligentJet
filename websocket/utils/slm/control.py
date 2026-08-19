@@ -7,6 +7,11 @@
 # @File    : control.py
 # @Project : intelligent-jet
 
+"""
+消防炮控制模块 - 通过 GCAN-212 协议实现方向和角度控制
+"""
+
+
 
 import socket
 

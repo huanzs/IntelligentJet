@@ -7,6 +7,11 @@
 # @File    : ptz_service.py
 # @Project : intelligent-jet
 
+"""
+云台(PTZ) WebSocket 服务 - 处理云台方向控制和角度查询
+"""
+
+
 
 import asyncio
 import json

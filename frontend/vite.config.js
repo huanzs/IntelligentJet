@@ -5,6 +5,9 @@
  * @File    : vite.config.js
  * @Project : intelligent-jet
  */
+ * 
+ * Vite 构建配置 - 开发服务器端口和API代理设置
+ */
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'

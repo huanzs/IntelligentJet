@@ -5,6 +5,9 @@
  * @File    : auth.js
  * @Project : intelligent-jet
  */
+ * 
+ * 认证 API 封装 - 登录/注册/刷新Token/获取用户信息
+ */
 
 import http from './index'
 

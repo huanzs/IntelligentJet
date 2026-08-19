@@ -8,6 +8,11 @@
 # @Project : intelligent-jet
 
 """
+Pelco-D 云台控制协议实现 - 支持7个方向命令和绝对角度定位
+"""
+
+
+"""
 云台控制模块
 功能：云台协议命令构建、角度转换、旋转控制、查询、初始化、搜索
 从 模块测试/ptz/utils/ptz_control.py 中提取

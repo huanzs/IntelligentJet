@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : camera_control.py
 # @Project : intelligent-jet
+
+"""
+摄像头云台控制模块 - 实现 Pelco-D 协议的云台方向控制和角度定位
+"""
+
 import json
 import sys
 

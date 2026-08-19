@@ -6,6 +6,11 @@
 # @File    : roles.py
 # @Project : intelligent-jet
 
+"""
+角色管理 API 模块 - 提供角色 CRUD 和权限分配接口
+"""
+
+
 from flask import Blueprint, request
 from app.models.role import Role
 from app.models.permission import Permission

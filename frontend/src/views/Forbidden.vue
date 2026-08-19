@@ -5,6 +5,9 @@
  * @File    : Forbidden.vue
  * @Project : intelligent-jet
  */
+ *
+ * 403 禁止访问页 - 无权限提示
+ */
 
 <template>
   <div class="forbidden-page">

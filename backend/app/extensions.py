@@ -6,6 +6,11 @@
 # @File    : extensions.py
 # @Project : intelligent-jet
 
+"""
+Flask 扩展初始化模块 - 初始化 SQLAlchemy ORM 和 Flask-Migrate 数据库迁移工具
+"""
+
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 

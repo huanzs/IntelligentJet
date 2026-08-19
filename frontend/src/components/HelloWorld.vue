@@ -5,6 +5,9 @@
  * @File    : HelloWorld.vue
  * @Project : intelligent-jet
  */
+ *
+ * HelloWorld 示例组件
+ */
 
 <script setup>
 import { ref } from 'vue'

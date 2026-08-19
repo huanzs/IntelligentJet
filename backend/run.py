@@ -6,6 +6,11 @@
 # @File    : run.py
 # @Project : intelligent-jet
 
+"""
+Flask 应用启动入口 - 创建应用实例并运行开发服务器
+"""
+
+
 from app import create_app
 from app.extensions import db
 from app.models.user import User

@@ -7,6 +7,11 @@
 # @File    : watch_dog6.py
 # @Project : intelligent-jet
 
+"""
+智能联动主控模块v6(最新) - 完整版联动控制，含PID闭环和GCAN协议
+"""
+
+
 
 import os
 import socket

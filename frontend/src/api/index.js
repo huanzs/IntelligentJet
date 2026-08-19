@@ -5,6 +5,9 @@
  * @File    : index.js
  * @Project : intelligent-jet
  */
+ * 
+ * Axios HTTP 客户端 - 统一请求拦截器，自动携带 JWT Token
+ */
 
 import axios from 'axios'
 import { useAuthStore } from '../stores/auth'

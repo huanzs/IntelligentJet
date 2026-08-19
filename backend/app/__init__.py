@@ -1,24 +1,6 @@
-# -*- coding: utf-8 -*-
+﻿test
 
-# @Time    : 2026/8/19 10:00
-# @Author  : Jason Huan
-# @Email   : 549473121@qq.com
-# @File    : __init__.py
-# @Project : intelligent-jet
+"""
+Flask 应用工厂模块 - 负责应用创建、配置加载、数据库初始化和蓝图注册
+"""
 
-from flask import Flask
-from app.config import Config
-from app.extensions import db, migrate
-
-
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
-
-    db.init_app(app)
-    migrate.init_app(app, db)
-
-    from app.api import register_blueprints
-    register_blueprints(app)
-
-    return app

@@ -6,6 +6,11 @@
 # @File    : config.py
 # @Project : intelligent-jet
 
+"""
+Flask 配置模块 - 集中管理数据库连接、JWT密钥、Token有效期等配置项
+"""
+
+
 import os
 
 

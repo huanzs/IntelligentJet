@@ -5,6 +5,9 @@
  * @File    : App.vue
  * @Project : intelligent-jet
  */
+ *
+ * 根组件 - 仅包含 router-view 路由出口
+ */
 
 <template>
   <router-view />

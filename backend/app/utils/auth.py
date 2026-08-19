@@ -6,6 +6,11 @@
 # @File    : auth.py
 # @Project : intelligent-jet
 
+"""
+JWT 认证工具模块 - 提供 Token 生成/解码/验证和权限装饰器
+"""
+
+
 import jwt
 from datetime import datetime, timedelta, timezone
 from flask import current_app

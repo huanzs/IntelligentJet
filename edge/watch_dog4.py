@@ -7,6 +7,11 @@
 # @File    : watch_dog4.py
 # @Project : intelligent-jet
 
+"""
+智能联动主控模块v4 - 精简版联动控制
+"""
+
+
 
 import os
 import socket

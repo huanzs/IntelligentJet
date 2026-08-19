@@ -7,6 +7,11 @@
 # @File    : watch_dog5.py
 # @Project : intelligent-jet
 
+"""
+智能联动主控模块v5 - 优化版联动控制，支持双摄像头
+"""
+
+
 
 import os
 import socket

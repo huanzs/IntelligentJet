@@ -5,6 +5,9 @@
  * @File    : auth.js
  * @Project : intelligent-jet
  */
+ * 
+ * Pinia 认证状态管理 - Token存储/用户信息/权限列表/登出
+ */
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'

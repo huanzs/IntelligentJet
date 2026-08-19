@@ -5,6 +5,9 @@
  * @File    : permissions.js
  * @Project : intelligent-jet
  */
+ * 
+ * 权限管理 API 封装 - 列表查询和增删
+ */
 
 import http from './index'
 

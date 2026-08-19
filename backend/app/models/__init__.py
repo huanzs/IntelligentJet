@@ -6,6 +6,11 @@
 # @File    : __init__.py
 # @Project : intelligent-jet
 
+"""
+数据模型聚合模块 - 统一导出 User/Role/Permission 模型和关联表
+"""
+
+
 from app.models.user import User, user_roles
 from app.models.role import Role, role_permissions
 from app.models.permission import Permission

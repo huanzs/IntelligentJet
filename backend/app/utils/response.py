@@ -6,6 +6,11 @@
 # @File    : response.py
 # @Project : intelligent-jet
 
+"""
+统一响应格式模块 - 提供 success_response 和 error_response 工具函数
+"""
+
+
 from flask import jsonify
 
 

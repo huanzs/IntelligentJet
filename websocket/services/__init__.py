@@ -7,6 +7,11 @@
 # @File    : __init__.py
 # @Project : intelligent-jet
 
+"""
+WebSocket 服务模块聚合包
+"""
+
+
 
 import json
 

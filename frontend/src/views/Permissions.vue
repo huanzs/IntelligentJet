@@ -5,6 +5,9 @@
  * @File    : Permissions.vue
  * @Project : intelligent-jet
  */
+ *
+ * 权限管理页 - 权限列表和创建/删除
+ */
 
 <template>
   <div class="permissions-page">

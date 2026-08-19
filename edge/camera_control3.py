@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : camera_control3.py
 # @Project : intelligent-jet
+
+"""
+摄像头云台控制模块v3 - 支持随机扫描和线程安全的云台控制
+"""
+
 import random
 import threading
 import time

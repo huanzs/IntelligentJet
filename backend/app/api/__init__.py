@@ -6,6 +6,11 @@
 # @File    : __init__.py
 # @Project : intelligent-jet
 
+"""
+API 蓝图注册模块 - 统一注册 auth/users/roles/permissions 四组 REST API 蓝图
+"""
+
+
 from app.api.auth import auth_bp
 from app.api.users import users_bp
 from app.api.roles import roles_bp

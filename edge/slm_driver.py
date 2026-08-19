@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : slm_driver.py
 # @Project : intelligent-jet
+
+"""
+消防炮(SLM)驱动模块 - 通过 TCP Socket 实现消防炮方向和角度控制
+"""
+
 import socket
 
 

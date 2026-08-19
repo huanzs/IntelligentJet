@@ -5,6 +5,9 @@
  * @File    : MainLayout.vue
  * @Project : intelligent-jet
  */
+ *
+ * 主布局组件 - 侧边栏+顶栏+内容区的暗色主题布局
+ */
 
 <template>
   <div class="main-layout">

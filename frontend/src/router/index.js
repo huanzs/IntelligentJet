@@ -5,6 +5,9 @@
  * @File    : index.js
  * @Project : intelligent-jet
  */
+ * 
+ * Vue Router 路由配置 - 含路由守卫和权限拦截
+ */
 
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'

@@ -5,6 +5,9 @@
  * @File    : Dashboard.vue
  * @Project : intelligent-jet
  */
+ *
+ * 仪表盘 - 系统概览，展示用户/角色/权限统计数据
+ */
 
 <template>
   <div class="dashboard">

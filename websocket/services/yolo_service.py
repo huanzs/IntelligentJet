@@ -7,6 +7,11 @@
 # @File    : yolo_service.py
 # @Project : intelligent-jet
 
+"""
+YOLO 火焰检测 WebSocket 服务 - 推送检测帧和状态数据
+"""
+
+
 
 import asyncio
 import json

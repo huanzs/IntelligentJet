@@ -5,6 +5,9 @@
  * @File    : PtzControl.vue
  * @Project : intelligent-jet
  */
+ *
+ * 云台控制面板 - WebSocket实时云台方向和角度控制
+ */
 
 <template>
   <div class="ptz-page">

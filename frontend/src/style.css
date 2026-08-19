@@ -5,6 +5,9 @@
  * @File    : style.css
  * @Project : intelligent-jet
  */
+ *
+ * 全局基础样式 - CSS变量定义和重置
+ */
 
 :root {
   --text: #6b6375;

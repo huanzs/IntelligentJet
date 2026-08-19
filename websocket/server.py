@@ -7,6 +7,11 @@
 # @File    : server.py
 # @Project : intelligent-jet
 
+"""
+WebSocket 服务端主模块 - 基于 aiohttp 实现三路 WS 服务(YOLO/PTZ/SLM)
+"""
+
+
 
 import asyncio
 import os

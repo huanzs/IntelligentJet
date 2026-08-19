@@ -6,6 +6,11 @@
 # @File    : camera_control4.py
 # @Project : intelligent-jet
 
+"""
+摄像头云台控制模块v4 - 精简版云台控制，支持线程安全的角度调节
+"""
+
+
 import threading
 
 

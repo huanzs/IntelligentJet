@@ -6,6 +6,11 @@
 # @File    : detect.py
 # @Project : intelligent-jet
 
+"""
+YOLOv5 目标检测脚本 - 基于 Ultralytics YOLOv5 的推理检测入口
+"""
+
+
 # Ultralytics YOLOv5 🚀, AGPL-3.0 license
 """
 Run YOLOv5 detection inference on images, videos, directories, globs, YouTube, webcam, streams, etc.

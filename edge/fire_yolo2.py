@@ -6,6 +6,11 @@
 # @Email   : 549473121@qq.com
 # @File    : fire_yolo2.py
 # @Project : intelligent-jet
+
+"""
+火焰 YOLOv5 检测模块v2 - 优化版火焰检测，支持多模型切换
+"""
+
 import sys
 import os
 # 添加 YOLOv5 目录到 Python 路径

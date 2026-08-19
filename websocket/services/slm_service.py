@@ -7,6 +7,11 @@
 # @File    : slm_service.py
 # @Project : intelligent-jet
 
+"""
+消防炮(SLM) WebSocket 服务 - 处理消防炮方向控制和状态查询
+"""
+
+
 
 import asyncio
 import json

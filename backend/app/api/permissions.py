@@ -6,6 +6,11 @@
 # @File    : permissions.py
 # @Project : intelligent-jet
 
+"""
+权限管理 API 模块 - 提供权限列表查询和创建/删除接口
+"""
+
+
 from flask import Blueprint, request
 from app.models.permission import Permission
 from app.utils.auth import require_permission

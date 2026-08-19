@@ -7,6 +7,11 @@
 # @File    : protocol_parser.py
 # @Project : intelligent-jet
 
+"""
+GCAN-212 协议解析模块 - 解析消防炮控制帧的命令和角度数据
+"""
+
+
 class ProtocolParser:
     def __init__(self, delimiter=' '):
         """

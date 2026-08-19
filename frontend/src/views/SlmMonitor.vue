@@ -5,6 +5,9 @@
  * @File    : SlmMonitor.vue
  * @Project : intelligent-jet
  */
+ *
+ * 消防炮监控页 - 实时监控消防炮角度和运动状态
+ */
 
 <template>
   <div class="slm-page">

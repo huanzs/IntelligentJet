@@ -5,6 +5,9 @@
  * @File    : Login.vue
  * @Project : intelligent-jet
  */
+ *
+ * 登录页 - 用户名密码登录，支持 JWT 双令牌
+ */
 
 <template>
   <div class="login-page">

@@ -5,6 +5,9 @@
  * @File    : main.js
  * @Project : intelligent-jet
  */
+ * 
+ * Vue 3 应用入口 - 创建根实例，挂载 Pinia/Router/ElementPlus
+ */
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
